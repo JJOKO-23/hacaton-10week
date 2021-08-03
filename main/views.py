@@ -4,7 +4,6 @@ from django.shortcuts import render
 # Create your views here.
 
 
-<<<<<<< HEAD
 def categories(request):
     return render(request, 'index.html')
 
@@ -30,7 +29,3 @@ def checkout(request):
 
 
 
-=======
-def index(request):
-    return render(request, 'index.html')
->>>>>>> 010f106998a13b8b0d9f057908da31726c0af9d9
