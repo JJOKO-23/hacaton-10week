@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # libs
+    'crispy_forms',
+    'cart',
+
+
+
     'main',
-    'product',
     'account',
 ]
 
@@ -68,12 +73,16 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processor.cart_total_amount',
+
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'shophac.wsgi.application'
+CART_SESSION_ID = 'cart'
+
 
 
 # Database
@@ -81,8 +90,12 @@ WSGI_APPLICATION = 'shophac.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  'electro_db',
+        'USER': 'test_user',
+        'PASSWORD': '1',
+        'HOST':  'localhost',
+        'PORT': 5432,
     }
 }
 
@@ -131,7 +144,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # AUTH_USER_MODEL = 'account.User'
-#
-#
-# LOGOUT_REDIRECT_URL = '/cooking'
-# LOGIN_REDIRECT_URL = '/cooking'
+
+
+LOGOUT_REDIRECT_URL = '/home'
+LOGIN_REDIRECT_URL = '/home'

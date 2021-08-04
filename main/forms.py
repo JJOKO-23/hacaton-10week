@@ -1,18 +1,17 @@
-from datetime import datetime
-
 from django import forms
 
 from .models import *
 
 
-class ProductForm(forms.ModelForm):
+class CreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ('user', )
+        fields = "__all__"
 
 
-# class ImageForm(forms.ModelForm):
-#     class Meta:
-#         model = Image
-#         fields = ('image', )
+class UpdateProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
 
