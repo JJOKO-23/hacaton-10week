@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% load cart_tag %}
-
 {% block content %}
 {% for key,product in request.session.cart.items %}
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 30rem; margin: 25px;">
   <img src="{{ product.image }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
@@ -24,7 +23,6 @@
   </div>
   {% endfor %}
 </div>
-    <a class="btn btn-warning" href="{% url 'cart_clear' %}" role="button">Clear</a>
-
+    <a class="btn btn-warning" style="margin-left: 25px;" href="{% url 'cart_clear' %}" role="button">Clear</a>
 
 {% endblock %}

@@ -48,7 +48,7 @@ def checkout(request):
 
 class SearchListView(ListView):
     model = Product
-    template_name = 'products/search.html'
+    template_name = 'search.html'
     context_object_name = 'products'
 
     def get_queryset(self):

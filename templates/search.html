@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block content %}
-<h1>Search results</h1>
-<div class="posts">
-    {% for product in products %}
-    <article>
-        <a href="#" class="image"><img src="{{ recipe.get_image }}" style="width: 200px; height: 200px;" alt="" /></a>
-        <h3>{{ product }}</h3>
-        <p> {{ product.description| truncatewords:10}}</p>
-        <ul class="actions">
-            <li><a href="{% url 'detail' product.id %}" class="button">More</a></li>
-        </ul>
-    </article>
-    {% endfor %}
+<h1>Search Results:</h1>
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  {% for product in products %}
+  <div class="card mb-3" style="max-width: 800px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img style="width: 300px; height: auto;" src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h4>
+          <p class="card-text">{{ product.description|truncatechars:20 }}</p>
+          <p class="card-text"><small class="text-muted">M'${{ product.price }}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
-{% endblock %}
+  {% endblock %}

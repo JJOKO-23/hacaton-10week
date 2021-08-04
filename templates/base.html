@@ -76,9 +76,9 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
+								<form class="d-flex" method="get" action="{% url 'search' %}" >
+								  <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+								  <button class="btn btn-outline-secondary" type="submit">Search</button>
 								</form>
 							</div>
 						</div>
