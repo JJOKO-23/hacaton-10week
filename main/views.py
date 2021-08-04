@@ -1,7 +1,19 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from datetime import timedelta
 
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.forms import modelformset_factory
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.utils import timezone
+from django.views.generic import ListView, DetailView, DeleteView
+
+from .forms import *
+from .models import *
+
+# from .permissions import UserHasPermissionMixin
 
 
 def categories(request):
@@ -24,46 +36,14 @@ def checkout(request):
     return render(request, 'checkout.html')
 
 
+def register(request):
+    return render(request, 'register.html')
 
-# from datetime import timedelta
-#
-# from django.contrib.auth.decorators import login_required
-# from django.db.models import Q
-# from django.forms import modelformset_factory
-# from django.http import HttpResponseRedirect, HttpResponse
-# from django.shortcuts import render, get_object_or_404, redirect
-# from django.contrib import messages
-# from django.urls import reverse_lazy
-# from django.utils import timezone
-# from django.views.generic import ListView, DetailView, DeleteView
-#
-# from .forms import *
-# from .models import *
-#
-# # from .permissions import UserHasPermissionMixin
-#
-#
-# from datetime import timedelta
-#
-# from django.contrib.auth.decorators import login_required
-# from django.db.models import Q
-# from django.forms import modelformset_factory
-# from django.http import HttpResponseRedirect, HttpResponse
-# from django.shortcuts import render, get_object_or_404, redirect
-# from django.contrib import messages
-# from django.urls import reverse_lazy
-# from django.utils import timezone
-# from django.views.generic import ListView, DetailView, DeleteView
-#
-# from .forms import *
-# from .models import *
-#
-# from .permissions import UserHasPermissionMixin
 #
 #
 # class MainPageView(ListView):
 #     model = Product
-#     template_name = 'index.html'
+#     template_name = 'store.html'
 #     context_object_name = 'products'
 #     paginate_by = 2
 #
@@ -94,9 +74,9 @@ def checkout(request):
 #
 #
 #
-# class CategoryDetailView(DetailView):
+# class StoreView(DetailView):
 #     model = Category
-#     template_name = 'category-detail.html'
+#     template_name = 'index.html'
 #     context_object_name = 'category'
 #
 #     def get(self, request, *args, **kwargs):
@@ -106,14 +86,14 @@ def checkout(request):
 #
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
-#         context['recipes'] = Recipe.objects.filter(category_id=self.slug)
+#         context['products'] = Product.objects.filter(category_id=self.slug)
 #         return context
 #
 #
-# class RecipeDetailView(DetailView):
-#     model = Recipe
-#     template_name = 'product-detail.html'
-#     context_object_name = 'recipe'
+# class ProductDetailView(DetailView):
+#     model = Product
+#     template_name = 'product.html'
+#     context_object_name = 'product'
 #
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
@@ -160,7 +140,7 @@ def checkout(request):
 #         return render(request, 'update-product.html', locals())
 #     else:
 #         return HttpResponse('<h1>403 Forbidden</h1>')
-#
+
 #
 # class DeleteRecipeView(UserHasPermissionMixin, DeleteView ):
 #     model = Product
@@ -173,9 +153,7 @@ def checkout(request):
 #         self.object.delete()
 #         messages.add_message(request, messages.SUCCESS, 'Successfully deleted!')
 #         return HttpResponseRedirect(success_url)
-#
-#
-#
+
 
 
 
