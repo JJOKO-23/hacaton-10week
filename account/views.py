@@ -14,6 +14,7 @@ from django.views.generic import CreateView, DetailView
 #     success_url = reverse_lazy('home')
 #     success_message = 'Successfully registered'
 
+
 def register(request):
     return render(request, 'account/register.html')
 
