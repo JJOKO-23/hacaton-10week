@@ -9,7 +9,11 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+<<<<<<< HEAD
 import os
+=======
+
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
 
     # libs
     'crispy_forms',
@@ -46,6 +51,8 @@ INSTALLED_APPS = [
 
     'main',
     'account',
+=======
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e
 ]
 
 MIDDLEWARE = [
@@ -63,9 +70,13 @@ ROOT_URLCONF = 'shophac.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [
             os.path.join(BASE_DIR, 'templates')
         ],
+=======
+        'DIRS': [],
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,16 +84,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+<<<<<<< HEAD
                 'cart.context_processor.cart_total_amount',
 
+=======
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'shophac.wsgi.application'
+<<<<<<< HEAD
 CART_SESSION_ID = 'cart'
 
+=======
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e
 
 
 # Database
@@ -90,12 +107,17 @@ CART_SESSION_ID = 'cart'
 
 DATABASES = {
     'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.db.backends.postgresql',
         'NAME':  'electro_db',
         'USER': 'amantur',
         'PASSWORD': '1',
         'HOST':  'localhost',
         'PORT': 5432,
+=======
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e
     }
 }
 
@@ -137,6 +159,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
@@ -148,3 +171,5 @@ AUTH_USER_MODEL = 'account.CustomUser'
 
 LOGOUT_REDIRECT_URL = '/home'
 LOGIN_REDIRECT_URL = '/home'
+=======
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e

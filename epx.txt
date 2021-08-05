@@ -1,7 +1,11 @@
 Django==3.1
 psycopg2-binary==2.8.5
+<<<<<<< HEAD
 Pillow==7.1
 django-crispy-forms
 python-decouple==3.1
 django-shopping-cart==0.1
 
+=======
+Pillow==7.1
+>>>>>>> 77de304d8ff9855a02c4ab4525a46ce8a84ea15e
