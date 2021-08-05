@@ -168,36 +168,36 @@ class ProductDetailView(DetailView):
 
 
 
-class ProductCreateView(CreateView):
-    model = Product
-    template_name = 'add-product.html'
-    form_class = CreateProductForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['product_form'] = self.get_form(self.get_form_class())
-        return context
-
-
-class ProductUpdateView(UpdateView):
-    model = Product
-    template_name = 'update-product.html'
-    form_class = UpdateProductForm
-    pk_url_kwarg = 'id'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['product_form'] = self.get_form(self.get_form_class())
-        return context
-
-
-class ProductDeleteView(DeleteView):
-    model = Product
-    template_name = 'delete-product.html'
-    pk_url_kwarg = 'id'
-
-    def get_success_url(self):
-        return reverse('home')
+# class ProductCreateView(CreateView):
+#     model = Product
+#     template_name = 'add-product.html'
+#     form_class = CreateProductForm
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['product_form'] = self.get_form(self.get_form_class())
+#         return context
+#
+#
+# class ProductUpdateView(UpdateView):
+#     model = Product
+#     template_name = 'update-product.html'
+#     form_class = UpdateProductForm
+#     pk_url_kwarg = 'id'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['product_form'] = self.get_form(self.get_form_class())
+#         return context
+#
+#
+# class ProductDeleteView(DeleteView):
+#     model = Product
+#     template_name = 'delete-product.html'
+#     pk_url_kwarg = 'id'
+#
+#     def get_success_url(self):
+#         return reverse('home')
 
 
 
@@ -253,36 +253,6 @@ class ProductDeleteView(DeleteView):
 #         messages.add_message(request, messages.SUCCESS, 'Successfully deleted!')
 #         return HttpResponseRedirect(success_url)
 #
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #
 # from django.http import HttpResponse, HttpResponseRedirect
 # from django.shortcuts import render, redirect, get_object_or_404
@@ -364,3 +334,55 @@ class ProductDeleteView(DeleteView):
 #         product.delete()
 #     return redirect('home')
 #     return render(request, '')
+
+
+# class ProductDetailView(DetailView):
+#     model = Product
+#     template_name = 'main/detail.html'
+#     context_object_name = 'product'
+#     pk_url_kwarg = 'id'
+
+
+class IsAdminCheckMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_superuser
+
+
+class ProductCreateView(IsAdminCheckMixin, CreateView):
+    model = Product
+    template_name = 'add-product.html'
+    form_class = CreateProductForm
+
+
+class ProductUpdateView(IsAdminCheckMixin, UpdateView):
+    model = Product
+    template_name = 'update-product.html'
+    form_class = UpdateProductForm
+    pk_url_kwarg = 'id'
+
+
+class ProductDeleteView(IsAdminCheckMixin, DeleteView):
+    model = Product
+    template_name = 'delete-product.html'
+    pk_url_kwarg = 'id'
+
+    def get_success_url(self):
+        return reverse('home')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

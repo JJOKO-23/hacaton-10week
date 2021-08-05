@@ -9,8 +9,6 @@
 
 		<title>Electro - HTML Ecommerce Template</title>
 
-
-
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -22,7 +20,7 @@
 		<link type="text/css" rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="{% static 'assets/assets/css/nouislider.min.css' %}"/>
+		<link type="text/css" rel="stylesheet" href="{% static 'assets/css/nouislider.min.css' %}"/>
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
@@ -51,7 +49,18 @@
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> M'$</a></li>
-						<li><a href="{% url 'register' %}"><i class="fa fa-user-o"></i> My Account</a></li>
+						{% if request.user.is_authenticated  %}
+						<a href="{% url 'add-product' %}" style="color: white;">Add product</a>
+						{% endif %}
+						{% if not request.user.is_authenticated %}
+						<a href="{% url 'register' %}" >Sign Up</a>
+						<a href="{% url 'login' %}" >Login</a>
+						{% else %}
+						<h4>{{ request.user.username }}</h4>
+						<a href="{% url 'profile' %}" >profile</a>
+						<a href="{% url 'logout' %}" >Logout</a>
+						{% endif %}
+<!--						<li><a href="{% url 'register' %}"><i class="fa fa-user-o"></i> My Account</a></li>-->
 					</ul>
 				</div>
 			</div>
@@ -87,29 +96,12 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ct">
-
-
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-
-									</a>
-								</div>
-								<!-- /Wishlist -->
-
 								<!-- Cart -->
-									<a href="{% url 'cart_detail' %}"><i class="fa fa-shopping-cart">Cart</i></a>
+									<button type="button" class="btn btn-outline-dark" ><a href="{% url 'cart_detail' %}"><i class="fa fa-shopping-cart">Cart</i></a></button>
 								<!-- /Cart -->
 
 								<!-- Menu Toogle -->
-								<div class="menu-toggle">
-									<a href="{% url 'store' %}">
-										<i class="fa fa-bars"></i>
-										<span>Menu</span>
-									</a>
-								</div>
+									<button type="button" class="btn btn-outline-dark" ><a href="{% url 'store' %}"><i class="fa fa-bars">Menu</i></a></button>
 								<!-- /Menu Toogle -->
 							</div>
 						</div>
@@ -207,30 +199,12 @@
 							</div>
 						</div>
 
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Information</h3>
-								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
-								</ul>
-							</div>
-						</div>
-
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li><a href="{% url 'register' %}">My Account</a></li>
+									<li><a href="{% url 'cart_detail' %}">View Cart</a></li>
 								</ul>
 							</div>
 						</div>
@@ -260,8 +234,6 @@
 								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
-
-
 						</div>
 					</div>
 						<!-- /row -->

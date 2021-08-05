@@ -1,76 +1,14 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-
-
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Create Account</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="{% url 'home' %}">Home</a></li>
-							<li class="active">Register</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
-
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
-							<div class="section-title">
-								<h3 class="title">Register</h3>
-							</div>
-                            <div class="form-group">
-								<input class="input" type="text" name="username" placeholder="Username">
-							</div>
-                            <div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
-							</div>
-                            <div class="form-group">
-								<input class="input" type="password" name="password" placeholder="Password">
-							</div>
-                            <div class="form-group">
-								<input class="input" type="password" name="password" placeholder="Password_Confirmation">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="First Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Last Name">
-							</div>
-							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="create-account">
-									<a class="btn btn-primary" href="{% url 'home' %}" role="button">Sing up</a>
-								</div>
-							</div>
-						</div>
-						<!-- /Billing Details -->
-
-
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
-
-
+<div style="margin-left: 10px">
+  <form method="post" enctype="multipart/form-data">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Sign up</button>
+  </form>
+</div>
 
 {% endblock %}
+
