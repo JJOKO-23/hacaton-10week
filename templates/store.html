@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">All Categories</a></li>
+							<li><a href="#">Accessories</a></li>
+							<li class="active">Store</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Categories</h3>
+							<div class="checkbox-filter">
+								<div class="input-checkbox">
+									<input type="checkbox" id="category-1">
+									<label for="category-1">
+										<span></span>
+										<ol class="list-group list-group-numbered">
+											{% for product in products %}
+										<li class="list-group-item"><a href="{% url 'store' category.slug %}">{{ product.category }}</a></li>
+											{% endfor %}
+										</ol>
+									</label>
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Price</h3>
+							<div class="price-filter">
+								<div class="input-number price-min">
+									<input id="price-min" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+								<span>-</span>
+								<div class="input-number price-max">
+									<input id="price-max" type="number">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+					</div>
+					<!-- /ASIDE -->
+
+
+
+						<!-- store products -->
+						<div class="row">
+							<!-- product -->
+							{% for product in products %}
+							<div class="col-md-4 col-xs-6">
+
+								<div class="product">
+									<div class="product-img">
+										<img src="{{ product.image.url }}" style="width: 300px; height: auto;" alt="">
+										<div class="product-label">
+											<span class="sale">-30%</span>
+											<span class="new">NEW</span>
+										</div>
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{ product.category }}</p>
+										<h3 class="product-name"><a href="#">{{ product.name }}</a></h3>
+										<p class="card-text">{{ product.description|truncatechars:150 }}</p>
+										<h4 class="product-price">M'${{ product.price }} <del class="product-old-price">M'${{ product.price }}</del></h4>
+									</div>
+									<div class="add-to-cart">
+										<button class="add-to-cart-btn"><a class="btn btn" href="{% url 'cart_add' product.id %}" role="button">Add to cart</a></button>
+									</div>
+								</div>
+
+							</div>
+							{% endfor %}
+							<!-- /product -->
+						</div>
+						<!-- /store products -->
+
+						<!-- store bottom filter -->
+					{% if is_paginated %}
+
+						<div class="store-filter clearfix">
+							<ul class="store-pagination">
+								{% if page_obj.has_previous %}
+
+								<li><a href="{% url 'store' %}?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+								{% endif %}
+
+								<li class="activate"><a href="#">{{ page_obj.number }}</a></li>
+
+								{% if page_obj.has_next %}
+								<li><a href="{% url 'store' %}?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+								{% endif %}
+
+							</ul>
+						</div>
+					{% endif %}
+
+						<!-- /store bottom filter -->
+					</div>
+					<!-- /STORE -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+
+
+{% endblock %}
