@@ -1,10 +1,12 @@
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 
 from .forms import CreateProductForm, UpdateProductForm
 from .models import *
+
+
 
 
 class ProductDetailView(DetailView):
@@ -25,10 +27,7 @@ class ProductCreateView(IsAdminCheckMixin, CreateView):
     template_name = 'main/create_product.html'
     form_class = CreateProductForm
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['product_form'] = self.get_form(self.get_form_class())
-    #     return context
+
 
 
 class ProductUpdateView(IsAdminCheckMixin, UpdateView):
@@ -37,10 +36,7 @@ class ProductUpdateView(IsAdminCheckMixin, UpdateView):
     form_class = UpdateProductForm
     pk_url_kwarg = 'id'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['product_form'] = self.get_form(self.get_form_class())
-    #     return context
+
 
 
 class ProductDeleteView(IsAdminCheckMixin, DeleteView):

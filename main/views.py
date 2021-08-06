@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateProductForm, UpdateProductForm
-from django.shortcuts import render, redirect
-from .models import Product
+from .forms import CreateProductForm, UpdateProductForm, NameForm
+from .models import Product, comment
+from django.http import HttpResponseRedirect
+
 
 
 def index(request):
@@ -11,9 +12,7 @@ def product_detail(request, id):
     product = Product.objects.get(id=id)
     return render(request, 'main/detail.html', {'product': product})
 
-def product_list(request, slug):
-    products = Product.objects.filter(category__slug=slug)
-    return render(request, 'list.html', {'products': products})
+
 
 def create_product(request):
     if request.method == 'POST':
@@ -47,3 +46,33 @@ def delete_product(request, id):
         return redirect('list', slug)
     return render(request, 'main/delete_product.html', {'product': product})
 
+#comment
+
+def get_comment(request):
+
+    if request.method == 'POST':
+
+        form = NameForm(request.POST)
+
+        if form.is_valid():
+            # Сохранение формы
+            form.save()
+
+            # Редирект на ту же страницу
+            return HttpResponseRedirect(request.path_info)
+
+    else:
+    # метод GET
+
+        form = NameForm()
+
+        # Получение всех имен из БД.
+        comms = comment.objects.all()
+
+    # И добавляем names в контекст, чтобы плучить к ним доступ в шаблоне
+    return render(request, 'main/comm.html', {'form': form, 'names': comms})
+
+
+def comment_list(request):
+    commentos = comment.objects.all()
+    return render(request, 'main/list.html', {'comment': commentos})

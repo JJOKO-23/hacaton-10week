@@ -1,9 +1,10 @@
+
 from django.db import models
 
 # Create your models here.
 
 
-
+#category
 
 class Category(models.Model):
     title = models.CharField(max_length=50, unique=True)
@@ -16,6 +17,8 @@ class Category(models.Model):
         if self.parent:
             return f'{self.parent} --> {self.title}'
         return self.title
+
+#crud
 
 class Product(models.Model):
     STATUS_CHOICES = (
@@ -42,3 +45,11 @@ class Product(models.Model):
     class Meta:
         ordering = ['name']
 
+#comment
+
+class comment(models.Model):
+    name = models.CharField(max_length=100)
+    body = models.TextField()
+
+    def __str__(self):
+        return 'Comment by {} '.format(self.name)
