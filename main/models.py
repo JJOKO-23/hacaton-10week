@@ -12,7 +12,7 @@ class Category(models.Model):
     def __str__(self):
         if self.parent:
             return f'{self.parent} --> {self.title}'
-        return  self.title
+        return self.title
 
 
 class Product(models.Model):
@@ -25,7 +25,6 @@ class Product(models.Model):
         ('red', 'красный'),
         ('blue', 'голубой'),
         ('Black', 'черный'),
-        ('White', 'белый'),
         ('grey', 'серый')
     )
     name = models.CharField(max_length=255)

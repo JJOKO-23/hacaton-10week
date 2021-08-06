@@ -76,8 +76,20 @@ class ProductListView(ListView):
 
 class CategoryView(ListView):
     model = Category
-    template_name = 'store.html'
+    template_name = 'category.html'
     context_object_name = 'categories'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        slug = self.kwargs.get('slug')
+        queryset = queryset.filter(category__slug=slug)
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.kwargs.get('slug')
+        return context
+
 
 
 class ProductDetailView(DetailView):
@@ -345,7 +357,7 @@ class ProductDetailView(DetailView):
 
 class IsAdminCheckMixin(UserPassesTestMixin):
     def test_func(self):
-        return self.request.user.is_authenticated and self.request.user.is_superuser
+        return self.request.user.is_authenticated
 
 
 class ProductCreateView(IsAdminCheckMixin, CreateView):

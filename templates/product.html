@@ -67,7 +67,7 @@
 							</div>
 
 							<div class="product-options">
-								<option value="0" style="color: red; font-size: 25px;">{{ product.color }}</option>
+								<option value="0" style="color: {{ product.color }}; font-size: 25px;">{{ product.color }}</option>
 							</div>
 							<div class="add-to-cart">
 								<button class="add-to-cart-btn"><a class="btn btn" href="{% url 'cart_add' product.id %}" role="button">Add to cart</a></button>
