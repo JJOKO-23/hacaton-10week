@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class Category(models.Model):
     slug = models.SlugField(primary_key=True, max_length=50)
     title = models.CharField(max_length=50)
@@ -55,5 +54,13 @@ class Image(models.Model):
 
     def __str__(self):
         return self.image.url
+
+
+class Comment(models.Model):
+    body = models.TextField()
+
+    def __str__(self):
+        return 'Comment by {} '.format(self.name)
+
 
 

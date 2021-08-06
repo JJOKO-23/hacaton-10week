@@ -75,7 +75,7 @@
 
 							<ul class="product-links">
 								<li>Category:</li>
-								<li><a href="{% url 'home' %}">{{ product.category }}</a></li>
+								<li><a href="{% url 'store' %}">{{ product.category }}</a></li>
 							</ul>
 						</div>
 					</div>
@@ -87,8 +87,10 @@
 		</div>
 		<!-- /SECTION -->
 
-								<button class="Update"><a class="btn btn-warning" href="{% url 'update-product' product.id %}" role="button">Update</a></button>
-								<button class="Delete"><a class="btn btn-danger" href="{% url 'delete-product' product.id %}" role="button">Delete</a></button>
+	<button class="Update"><a class="btn btn-warning" href="{% url 'update-product' product.id %}" role="button">Update</a></button>
+	<button class="Delete"><a class="btn btn-danger" href="{% url 'delete-product' product.id %}" role="button">Delete</a></button>
+	<button class="Comment"><a class="btn btn-comment" href="{% url 'comment' product.id %}" role="button">Comment</a></button>
+	{% block content2 %}{% endblock %}
 
 
 {% endblock %}

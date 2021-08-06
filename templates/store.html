@@ -35,10 +35,11 @@
 							<h3 class="aside-title">Categories</h3>
 							<div class="checkbox-filter">
 									<label>
+										<span></span>
 										{% for category in categories %}
-										{% if category.products.all %}
-									  <li class="list-group-item"><a href="{% url 'category_list' category.slug %}">{{ category.title }}</a></li>
-										{% endif %}
+<!--										{% if category.products.all %}-->
+										<li class="list-group-item"><a href="{% url 'category_list' category.slug %}">{{ category.title }}</a></li>
+<!--										{% endif %}-->
 										{% endfor %}
 									</label>
 							</div>
@@ -46,8 +47,6 @@
 						<!-- /aside Widget -->
 					</div>
 					<!-- /ASIDE -->
-
-
 
 						<!-- store products -->
 						<div class="row">

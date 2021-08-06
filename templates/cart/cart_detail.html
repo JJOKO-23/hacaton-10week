@@ -2,7 +2,7 @@
 {% load cart_tag %}
 {% block content %}
 {% for key,product in request.session.cart.items %}
-<div style="margin: 25px; display: flex;">
+<div style="margin: 25px; display: flex; justify-content: space-between; flex-wrap: wrap;">
     <div class="card" style="width: 500px;">
       <img src="{{ product.image }}" class="card-img-top" alt="...">
       <div class="card-body">
@@ -27,5 +27,7 @@
 </div>
 {% endfor %}
     <a class="btn btn-warning" style="margin-left: 25px;" href="{% url 'cart_clear' %}" role="button">Clear</a>
+    <a class="btn btn-success" style="margin-left: 25px;" href="{% url 'checkout' %}" role="button">Buy</a>
+
 
 {% endblock %}

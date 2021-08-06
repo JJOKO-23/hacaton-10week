@@ -1,0 +1,32 @@
+{% extends 'product.html' %}
+{% load static %}
+{% block content2 %}
+
+<form method="post">
+  {% csrf_token %}
+<form method="post">
+  <input type="hidden" name="csrfmiddlewaretoken" value="ASw5ngO5sOsJfgw4mmAJThuMMOf8UsDPbiyqTO5N81bYYybS5MxZuqqWeFdqnMPc">
+<p><label for="id_body"></label> <textarea name="body" cols="40" rows="10" required="" id="id_body" placeholder="Comment"  ></textarea></p>
+  <button type="submit" value="Submit">Send</button>
+</form>
+
+
+
+<h1>Comments:</h1>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: auto; height: auto;">
+  {% for comment in comments %}
+  <div class="card mb-3" style="max-width: 800px; min-width: 200px; min-height: 100px;  ">
+    <div class="row g-0">
+
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title"><a href="#">{{ name }}</a></h4>
+          <p class="card-text">{{ comment.body }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
